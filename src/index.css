@@ -55,6 +55,8 @@
     --rarity-godly: 312 100% 65%;
     --rarity-ancient: 280 100% 70%;
     --rarity-set: 175 80% 55%;
+    --rarity-chroma: 330 100% 70%;
+    --rarity-low-set: 195 85% 60%;
 
     /* Gradients */
     --gradient-brand: linear-gradient(135deg, hsl(312 100% 65%), hsl(251 100% 68%) 50%, hsl(210 100% 62%));
