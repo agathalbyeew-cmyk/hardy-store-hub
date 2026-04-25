@@ -36,9 +36,11 @@ export function Header() {
         scrolled ? "glass border-b border-border/40" : "bg-transparent",
       )}
     >
-      <div className="container flex h-28 md:h-36 items-center justify-between gap-4">
-        <Link to="/" aria-label="Hardy Store - Início" className="shrink-0">
-          <Logo />
+      <div className="container flex h-16 items-center justify-between gap-4">
+        <Link to="/" aria-label="Hardy Store - Início" className="shrink-0 relative">
+          <Logo className="absolute left-0 top-1/2 -translate-y-1/2" />
+          {/* Spacer to reserve horizontal space for the absolutely-positioned logo */}
+          <div className="h-16 w-28 md:w-36" aria-hidden="true" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
