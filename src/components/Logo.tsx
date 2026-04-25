@@ -3,33 +3,34 @@ import logoImg from "@/assets/logo-hardy.png";
 
 interface LogoProps {
   className?: string;
-  /** When true (header), renders only the image at a compact size with hover glow. */
-  showIcon?: boolean;
-  /** Override image height (in tailwind classes). */
-  size?: "sm" | "md" | "lg";
+  /** Image height tier. */
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 const sizeMap = {
-  sm: "h-9",
-  md: "h-12",
+  sm: "h-10",
+  md: "h-14",
   lg: "h-20",
+  xl: "h-28",
 };
 
+/**
+ * Hardy Store logo — renders the PNG sticker as-is (no circular crop,
+ * no background container). The PNG already includes the brand artwork
+ * with its own outline and sparkles.
+ */
 export function Logo({ className, size = "sm" }: LogoProps) {
   return (
-    <div className={cn("flex items-center", className)}>
-      <div className="relative">
-        <div className="absolute inset-0 bg-gradient-brand blur-xl opacity-40 animate-glow-pulse rounded-full" />
-        <img
-          src={logoImg}
-          alt="Hardy Store"
-          className={cn(
-            sizeMap[size],
-            "relative w-auto object-contain drop-shadow-[0_4px_16px_hsl(var(--pink)/0.5)]",
-          )}
-          draggable={false}
-        />
-      </div>
-    </div>
+    <img
+      src={logoImg}
+      alt="Hardy Store"
+      draggable={false}
+      className={cn(
+        sizeMap[size],
+        "w-auto object-contain select-none",
+        "drop-shadow-[0_6px_20px_hsl(var(--pink)/0.45)]",
+        className,
+      )}
+    />
   );
 }
