@@ -1,228 +1,87 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/ProductCard";
-import { PRODUCTS } from "@/data/products";
-import { STORE_CONFIG } from "@/data/store-config";
-import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users } from "lucide-react";
-import heroBg from "@/assets/hero-mascot.png";
-import type { Rarity } from "@/types/store";
-import { RARITY_LABELS } from "@/types/store";
-
-const featured = PRODUCTS.filter((p) => p.tag === "hot" || p.tag === "new" || p.tag === "promo").slice(0, 8);
-
-const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
-  { key: "chroma", gradient: "from-pink-400 to-rose-600", icon: "🌈" },
-  { key: "uncommon", gradient: "from-emerald-400 to-emerald-600", icon: "🔪" },
-  { key: "rare", gradient: "from-sky-400 to-blue-600", icon: "⚔️" },
-  { key: "legendary", gradient: "from-amber-400 to-orange-500", icon: "🗡️" },
-  { key: "godly", gradient: "from-pink-500 to-fuchsia-600", icon: "💎" },
-  { key: "set", gradient: "from-cyan-400 to-teal-600", icon: "🎁" },
-  { key: "low-set", gradient: "from-sky-300 to-cyan-500", icon: "📦" },
-];
-
-const reviews = [
-  { name: "LucasPlayz", text: "Entrega super rápida e o suporte é incrível! Recomendo demais.", days: "2 dias atrás" },
-  { name: "MiaGamer", text: "Comprei meu primeiro godly aqui, amei o atendimento!", days: "3 dias atrás" },
-  { name: "ShadowMM2", text: "Melhor loja de MM2 que já comprei, preços justos.", days: "1 semana atrás" },
-  { name: "NovaCraft", text: "Confiável de verdade. Já fiz 4 compras e nunca tive problema.", days: "2 semanas atrás" },
-];
+import { Button } from '../components/ui/button'
 
 export default function Home() {
   return (
-    <div className="overflow-hidden">
-      {/* HERO */}
-      <section className="relative">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={heroBg}
-            alt=""
-            aria-hidden="true"
-            className="h-full w-full object-cover opacity-15 mix-blend-luminosity"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Navigation */}
+      <nav className="bg-black/50 backdrop-blur-md border-b border-purple-500/20 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-2">
+              <div className="text-2xl">🐺</div>
+              <h1 className="text-xl font-bold text-purple-400">Hardy Store</h1>
+            </div>
+            <div className="flex gap-4">
+              <Button variant="ghost" className="text-white hover:text-purple-400">Produtos</Button>
+              <Button variant="ghost" className="text-white hover:text-purple-400">Sobre</Button>
+              <Button className="bg-purple-600 hover:bg-purple-700">Comprar</Button>
+            </div>
+          </div>
         </div>
+      </nav>
 
-        <div className="container py-16 md:py-24 lg:py-32">
-          <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-brand-pink/30">
-              <Sparkles className="h-3.5 w-3.5 text-brand-pink" />
-              <span className="text-xs font-semibold tracking-wide">Bem-vindo à nossa lojinha 💖</span>
-            </div>
-
-            <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-balance">
-              Os melhores itens de{" "}
-              <span className="gradient-text">Murder Mystery 2</span>
-              <br />
-              com os <span className="gradient-text-warm">melhores preços</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-              Itens raros, godlys, ancients e sets exclusivos. Entrega em até 24h, suporte
-              dedicado e a maior segurança em cada negociação.
-            </p>
-
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <Button asChild variant="hero" size="xl">
-                <Link to="/loja">
-                  Ver produtos <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild variant="glass" size="xl">
-                <a href={STORE_CONFIG.discordUrl} target="_blank" rel="noopener noreferrer">
-                  Entrar no Discord
-                </a>
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-6 pt-6 text-sm">
-              <div className="flex items-center gap-2"><Zap className="h-4 w-4 text-brand-orange" /><span>Entrega rápida</span></div>
-              <div className="flex items-center gap-2"><MessageCircle className="h-4 w-4 text-brand-pink" /><span>Atendimento confiável</span></div>
-              <div className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-brand-blue" /><span>Preços competitivos</span></div>
-            </div>
+      {/* Hero Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div className="space-y-8">
+          <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-600 to-purple-400 animate-pulse">
+            Hardy Store
+          </div>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            🐺 Fanix é um híbrido humano-lobo que representa o equilíbrio perfeito entre instinto afiado e estratégia precisa.
+          </p>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Como fundador e responsável pela Hardy Store, Fanix atua como curador de experiências premium dentro do universo de Murder Mystery 2. 
+            Com profundo conhecimento do mercado e visão estratégica, constrói uma loja que vai muito além de simples transações.
+          </p>
+          <div className="flex gap-4 justify-center pt-8">
+            <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white text-lg px-8">Explorar Loja</Button>
+            <Button size="lg" variant="outline" className="border-purple-400 text-purple-400 hover:bg-purple-400/10 text-lg px-8">Saiba Mais</Button>
           </div>
         </div>
       </section>
 
-      {/* TRUST STRIP */}
-      <section className="container">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { icon: Shield, title: "Compra segura", color: "text-brand-pink" },
-            { icon: Package, title: "Estoque atualizado", color: "text-brand-orange" },
-            { icon: Headphones, title: "Suporte dedicado", color: "text-brand-blue" },
-            { icon: Users, title: "Comunidade ativa", color: "text-brand-purple" },
-          ].map(({ icon: Icon, title, color }) => (
-            <div key={title} className="glass-card rounded-2xl p-4 flex items-center gap-3">
-              <div className={`h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center ${color}`}>
-                <Icon className="h-5 w-5" />
-              </div>
-              <span className="font-semibold text-sm md:text-base">{title}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* DESTAQUES */}
-      <section className="container py-16 md:py-20">
-        <div className="flex items-end justify-between mb-8 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 mb-2">
-              <Sparkles className="h-4 w-4 text-brand-orange" />
-              <span className="text-xs font-bold tracking-wider uppercase text-brand-orange">Destaques</span>
-            </div>
-            <h2 className="font-display font-black text-3xl md:text-4xl">Itens em alta agora</h2>
+      {/* Features Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-8 hover:border-purple-400/60 transition">
+            <div className="text-4xl mb-4">🎭</div>
+            <h3 className="text-lg font-bold text-purple-300 mb-2">Experiências Premium</h3>
+            <p className="text-gray-400">Curadas especialmente para os jogadores de Murder Mystery 2</p>
           </div>
-          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <Link to="/loja">Ver todos <ArrowRight className="h-4 w-4" /></Link>
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      </section>
-
-      {/* CATEGORIAS */}
-      <section className="container py-12 md:py-16">
-        <div className="mb-8">
-          <div className="inline-flex items-center gap-2 mb-2">
-            <Star className="h-4 w-4 text-brand-pink" />
-            <span className="text-xs font-bold tracking-wider uppercase text-brand-pink">Categorias populares</span>
+          <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-8 hover:border-purple-400/60 transition">
+            <div className="text-4xl mb-4">🔐</div>
+            <h3 className="text-lg font-bold text-purple-300 mb-2">Segurança Total</h3>
+            <p className="text-gray-400">Confiança para quem compra e liberdade para quem vende</p>
           </div>
-          <h2 className="font-display font-black text-3xl md:text-4xl">Explore por raridade</h2>
-        </div>
-
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
-          {categories.map((cat) => (
-            <Link
-              key={cat.key}
-              to={`/loja?cat=${cat.key}`}
-              className="group relative aspect-square rounded-2xl overflow-hidden glass-card transition-all hover:-translate-y-1 hover:shadow-elevated"
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-30 group-hover:opacity-50 transition-opacity`} />
-              <div className="relative h-full flex flex-col items-center justify-center gap-2 p-3 text-center">
-                <span className="text-3xl">{cat.icon}</span>
-                <span className="text-xs md:text-sm font-bold uppercase tracking-wider">{RARITY_LABELS[cat.key]}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* MARKETING BANNER */}
-      <section className="container py-12">
-        <div className="relative rounded-3xl overflow-hidden p-8 md:p-12 glass-card">
-          <div className="absolute inset-0 bg-gradient-hero opacity-30" />
-          <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-brand-pink/30 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-brand-blue/30 blur-3xl" />
-          <div className="relative grid md:grid-cols-3 gap-6 text-center">
-            {[
-              "Na Hardy Store, sua compra é segura do início ao fim.",
-              "Itens raros com preços que você não encontra em outro lugar.",
-              "Entrega rápida e suporte dedicado para você.",
-            ].map((phrase) => (
-              <p key={phrase} className="font-display font-bold text-lg md:text-xl text-balance">
-                {phrase}
-              </p>
-            ))}
+          <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-8 hover:border-purple-400/60 transition">
+            <div className="text-4xl mb-4">❤️</div>
+            <h3 className="text-lg font-bold text-purple-300 mb-2">Amável & Acessível</h3>
+            <p className="text-gray-400">Uma experiência única e confusamente atratente</p>
           </div>
         </div>
       </section>
 
-      {/* AVALIAÇÕES */}
-      <section className="container py-16">
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 mb-2">
-            <Star className="h-4 w-4 text-brand-orange fill-brand-orange" />
-            <span className="text-xs font-bold tracking-wider uppercase text-brand-orange">Avaliações</span>
-          </div>
-          <h2 className="font-display font-black text-3xl md:text-4xl">O que nossos clientes dizem</h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {reviews.map((r) => (
-            <div key={r.name} className="glass-card rounded-2xl p-5 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gradient-brand flex items-center justify-center font-black text-white">
-                  {r.name[0]}
-                </div>
-                <div>
-                  <div className="font-bold text-sm">{r.name}</div>
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3 w-3 fill-brand-orange text-brand-orange" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <p className="text-sm text-muted-foreground">{r.text}</p>
-              <div className="text-xs text-muted-foreground/70">{r.days}</div>
-            </div>
-          ))}
+      {/* About Fanix Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-lg border border-purple-500/20 mb-16">
+        <div className="text-center space-y-6">
+          <h2 className="text-4xl font-bold text-purple-300">Sobre Fanix</h2>
+          <div className="text-6xl">🐺</div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Sua abordagem combina carisma natural com profissionalismo sólido, transmitindo segurança para quem compra e liberdade para quem deseja vender ou expor seus produtos. 
+            Para Fanix, uma loja vai muito além de transações comerciais.
+          </p>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+            Sempre atento às tendências e às demandas dos jogadores, ele trabalha continuamente para evoluir a Hardy Store, mantendo um padrão visual marcante, navegação intuitiva e uma experiência única.
+          </p>
         </div>
       </section>
 
-      {/* CTA FINAL */}
-      <section className="container py-16">
-        <div className="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center glass-card">
-          <div className="absolute inset-0 bg-gradient-brand opacity-20 animate-gradient-shift bg-[length:200%_200%]" />
-          <div className="relative space-y-5">
-            <h2 className="font-display font-black text-3xl md:text-5xl text-balance">
-              Pronto para conquistar seus itens favoritos?
-            </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
-              Junte-se a centenas de jogadores que já confiam na Hardy Store.
-            </p>
-            <Button asChild variant="hero" size="xl">
-              <Link to="/loja">Começar a comprar <ArrowRight className="h-5 w-5" /></Link>
-            </Button>
-          </div>
+      {/* Footer */}
+      <footer className="bg-black/50 border-t border-purple-500/20 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-gray-400">
+          <p>Desenvolvido com ❤️ por Fanix | Hardy Store © 2026</p>
         </div>
-      </section>
+      </footer>
     </div>
-  );
+  )
 }
