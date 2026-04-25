@@ -48,7 +48,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto text-center space-y-6 animate-fade-in-up">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-brand-pink/30">
               <Sparkles className="h-3.5 w-3.5 text-brand-pink" />
-              <span className="text-xs font-semibold tracking-wide">A loja nº 1 de itens MM2 no Brasil</span>
+              <span className="text-xs font-semibold tracking-wide">Bem-vindo à nossa lojinha 💖</span>
             </div>
 
             <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-balance">
