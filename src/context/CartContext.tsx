@@ -24,7 +24,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (typeof window === "undefined") return [];
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? (JSON.parse(raw) as CartItem[]) : [];
+      if (!raw) return [];
+      const parsed = JSON.parse(raw) as CartItem[];
+      // Filter out items whose product no longer exists in the catalog
+      const validIds = new Set(PRODUCTS.map((p) => p.id));
+      return Array.isArray(parsed)
+        ? parsed.filter((i) => i && typeof i.productId === "string" && validIds.has(i.productId))
+        : [];
     } catch {
       return [];
     }
