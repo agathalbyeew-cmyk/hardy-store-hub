@@ -36,7 +36,7 @@ export function Header() {
         scrolled ? "glass border-b border-border/40" : "bg-transparent",
       )}
     >
-      <div className="container flex h-20 md:h-24 items-center justify-between gap-4">
+      <div className="container flex h-28 md:h-36 items-center justify-between gap-4">
         <Link to="/" aria-label="Hardy Store - Início" className="shrink-0">
           <Logo />
         </Link>
