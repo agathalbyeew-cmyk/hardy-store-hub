@@ -1,29 +1,34 @@
-import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import logoImg from "@/assets/logo-hardy.png";
 
 interface LogoProps {
   className?: string;
+  /** When true (header), renders only the image at a compact size with hover glow. */
   showIcon?: boolean;
+  /** Override image height (in tailwind classes). */
+  size?: "sm" | "md" | "lg";
 }
 
-export function Logo({ className, showIcon = true }: LogoProps) {
+const sizeMap = {
+  sm: "h-9",
+  md: "h-12",
+  lg: "h-20",
+};
+
+export function Logo({ className, size = "sm" }: LogoProps) {
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      {showIcon && (
-        <div className="relative">
-          <div className="absolute inset-0 bg-gradient-brand blur-md opacity-60 animate-glow-pulse rounded-full" />
-          <div className="relative h-9 w-9 rounded-2xl bg-gradient-brand flex items-center justify-center shadow-glow-pink">
-            <Sparkles className="h-5 w-5 text-white" strokeWidth={2.5} />
-          </div>
-        </div>
-      )}
-      <div className="flex flex-col leading-none">
-        <span className="font-display font-black text-xl tracking-tight gradient-text">
-          Hardy
-        </span>
-        <span className="font-display font-bold text-[10px] tracking-[0.3em] text-brand-orange uppercase -mt-0.5">
-          Store
-        </span>
+    <div className={cn("flex items-center", className)}>
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-brand blur-xl opacity-40 animate-glow-pulse rounded-full" />
+        <img
+          src={logoImg}
+          alt="Hardy Store"
+          className={cn(
+            sizeMap[size],
+            "relative w-auto object-contain drop-shadow-[0_4px_16px_hsl(var(--pink)/0.5)]",
+          )}
+          draggable={false}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,13 @@
-export type Rarity = "common" | "uncommon" | "rare" | "legendary" | "godly" | "ancient" | "set";
+export type Rarity =
+  | "common"
+  | "uncommon"
+  | "rare"
+  | "legendary"
+  | "godly"
+  | "ancient"
+  | "chroma"
+  | "set"
+  | "low-set";
 
 export type ProductTag = "promo" | "popular" | "last-units" | "new" | "hot";
 
@@ -38,7 +47,9 @@ export const RARITY_LABELS: Record<Rarity, string> = {
   legendary: "Lendário",
   godly: "Godly",
   ancient: "Ancient",
+  chroma: "Chroma",
   set: "Set",
+  "low-set": "Low Set",
 };
 
 export const RARITY_ORDER: Record<Rarity, number> = {
@@ -48,5 +59,7 @@ export const RARITY_ORDER: Record<Rarity, number> = {
   legendary: 4,
   godly: 5,
   ancient: 6,
-  set: 7,
+  chroma: 7,
+  set: 8,
+  "low-set": 9,
 };
