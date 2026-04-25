@@ -4,20 +4,20 @@ import { ProductCard } from "@/components/ProductCard";
 import { PRODUCTS } from "@/data/products";
 import { STORE_CONFIG } from "@/data/store-config";
 import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-mascot.png";
 import type { Rarity } from "@/types/store";
 import { RARITY_LABELS } from "@/types/store";
 
 const featured = PRODUCTS.filter((p) => p.tag === "hot" || p.tag === "new" || p.tag === "promo").slice(0, 8);
 
 const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
-  { key: "common", gradient: "from-slate-400 to-slate-600", icon: "🗡️" },
+  { key: "chroma", gradient: "from-pink-400 to-rose-600", icon: "🌈" },
   { key: "uncommon", gradient: "from-emerald-400 to-emerald-600", icon: "🔪" },
   { key: "rare", gradient: "from-sky-400 to-blue-600", icon: "⚔️" },
   { key: "legendary", gradient: "from-amber-400 to-orange-500", icon: "🗡️" },
   { key: "godly", gradient: "from-pink-500 to-fuchsia-600", icon: "💎" },
-  { key: "ancient", gradient: "from-purple-500 to-violet-700", icon: "🔮" },
   { key: "set", gradient: "from-cyan-400 to-teal-600", icon: "🎁" },
+  { key: "low-set", gradient: "from-sky-300 to-cyan-500", icon: "📦" },
 ];
 
 const reviews = [
@@ -36,11 +36,12 @@ export default function Home() {
           <img
             src={heroBg}
             alt=""
-            className="h-full w-full object-cover opacity-40"
-            width={1536}
-            height={1024}
+            aria-hidden="true"
+            className="h-full w-full object-cover opacity-15 mix-blend-luminosity"
+            width={1920}
+            height={1080}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
         </div>
 
         <div className="container py-16 md:py-24 lg:py-32">

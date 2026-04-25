@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 type SortKey = "rarity-desc" | "price-asc" | "price-desc" | "name-asc";
 
-const ALL_CATEGORIES: Array<Rarity | "all"> = ["all", "common", "uncommon", "rare", "legendary", "godly", "ancient", "set"];
+const ALL_CATEGORIES: Array<Rarity | "all"> = ["all", "chroma", "godly", "ancient", "legendary", "rare", "uncommon", "common", "set", "low-set"];
 
 const sortLabels: Record<SortKey, string> = {
   "rarity-desc": "Raridade (maior)",

@@ -10,7 +10,9 @@ const rarityClasses: Record<Rarity, string> = {
   legendary: "text-rarity-legendary",
   godly: "text-rarity-godly",
   ancient: "text-rarity-ancient",
+  chroma: "text-rarity-chroma",
   set: "text-rarity-set",
+  "low-set": "text-rarity-low-set",
 };
 
 const rarityBgClasses: Record<Rarity, string> = {
@@ -20,7 +22,9 @@ const rarityBgClasses: Record<Rarity, string> = {
   legendary: "bg-rarity-legendary/15 text-rarity-legendary border-rarity-legendary/30",
   godly: "bg-rarity-godly/15 text-rarity-godly border-rarity-godly/30",
   ancient: "bg-rarity-ancient/15 text-rarity-ancient border-rarity-ancient/30",
+  chroma: "bg-rarity-chroma/15 text-rarity-chroma border-rarity-chroma/30",
   set: "bg-rarity-set/15 text-rarity-set border-rarity-set/30",
+  "low-set": "bg-rarity-low-set/15 text-rarity-low-set border-rarity-low-set/30",
 };
 
 export function RarityLabel({ rarity, className }: { rarity: Rarity; className?: string }) {

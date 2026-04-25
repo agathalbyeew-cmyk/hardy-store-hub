@@ -64,6 +64,8 @@ export default {
           godly: "hsl(var(--rarity-godly))",
           ancient: "hsl(var(--rarity-ancient))",
           set: "hsl(var(--rarity-set))",
+          chroma: "hsl(var(--rarity-chroma))",
+          "low-set": "hsl(var(--rarity-low-set))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
