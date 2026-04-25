@@ -8,10 +8,10 @@ interface LogoProps {
 }
 
 const sizeMap = {
-  sm: "h-10",
-  md: "h-14",
-  lg: "h-20",
-  xl: "h-28",
+  sm: "h-16",
+  md: "h-20",
+  lg: "h-28",
+  xl: "h-36",
 };
 
 /**
