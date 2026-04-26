@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Product } from "@/types/store";
 import { formatBRL } from "@/data/store-config";
 import { useCart } from "@/context/CartContext";
