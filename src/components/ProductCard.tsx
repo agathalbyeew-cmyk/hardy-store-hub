@@ -50,8 +50,14 @@ export function ProductCard({ product, className }: ProductCardProps) {
       <div className="flex-1 flex flex-col gap-1 relative z-[1]">
         <h3 className="font-display font-bold text-base leading-tight text-balance">{product.name}</h3>
         <RarityLabel rarity={product.category} className="text-xs" />
-        <div className="mt-2 flex items-baseline justify-between">
+        <div className="mt-2 flex items-baseline gap-2 flex-wrap">
+          <span className="text-sm text-muted-foreground line-through decoration-destructive/70 decoration-2">
+            {formatBRL(product.price * 1.3)}
+          </span>
           <span className="font-display font-black text-xl gradient-text">{formatBRL(product.price)}</span>
+          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-destructive/15 text-destructive uppercase tracking-wide">
+            -30%
+          </span>
         </div>
         <div className="text-xs text-muted-foreground flex items-center gap-1">
           {isOut ? (
