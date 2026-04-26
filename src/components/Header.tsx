@@ -2,20 +2,22 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
+import { ShoppingCart, Menu, X, User as UserIcon, Handshake } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
   { to: "/", label: "Início" },
   { to: "/loja", label: "Loja" },
+  { to: "/seja-fornecedor", label: "Seja Fornecedor" },
   { to: "/sobre", label: "Sobre" },
-  { to: "/termos", label: "Termos" },
   { to: "/contato", label: "Contato" },
 ];
 
 export function Header() {
   const { totalItems } = useCart();
+  const { user, profile } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -73,6 +75,18 @@ export function Header() {
                   {totalItems}
                 </span>
               )}
+            </Link>
+          </Button>
+          <Button asChild variant="glass" size="sm">
+            <Link to={user ? "/conta" : "/auth"} aria-label={user ? "Minha conta" : "Entrar"}>
+              {user && profile?.avatar_url ? (
+                <img src={profile.avatar_url} alt="" className="h-5 w-5 rounded-full object-cover" />
+              ) : (
+                <UserIcon className="h-4 w-4" />
+              )}
+              <span className="hidden sm:inline">
+                {user ? (profile?.display_name || profile?.username || "Conta") : "Entrar"}
+              </span>
             </Link>
           </Button>
           <Button

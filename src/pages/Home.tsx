@@ -27,13 +27,6 @@ const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
   { key: "low-set", gradient: "from-sky-300 to-cyan-500", icon: iconLowSet },
 ];
 
-const reviews = [
-  { name: "LucasPlayz", text: "Entrega super rápida e o suporte é incrível! Recomendo demais.", days: "2 dias atrás" },
-  { name: "MiaGamer", text: "Comprei meu primeiro godly aqui, amei o atendimento!", days: "3 dias atrás" },
-  { name: "ShadowMM2", text: "Melhor loja de MM2 que já comprei, preços justos.", days: "1 semana atrás" },
-  { name: "NovaCraft", text: "Confiável de verdade. Já fiz 4 compras e nunca tive problema.", days: "2 semanas atrás" },
-];
-
 export default function Home() {
   return (
     <div className="overflow-hidden">
@@ -187,36 +180,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AVALIAÇÕES */}
+      {/* SEJA FORNECEDOR */}
       <section className="container py-16">
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 mb-2">
-            <Star className="h-4 w-4 text-brand-orange fill-brand-orange" />
-            <span className="text-xs font-bold tracking-wider uppercase text-brand-orange">Avaliações</span>
-          </div>
-          <h2 className="font-display font-black text-3xl md:text-4xl">O que nossos clientes dizem</h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {reviews.map((r) => (
-            <div key={r.name} className="glass-card rounded-2xl p-5 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gradient-brand flex items-center justify-center font-black text-white">
-                  {r.name[0]}
-                </div>
-                <div>
-                  <div className="font-bold text-sm">{r.name}</div>
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3 w-3 fill-brand-orange text-brand-orange" />
-                    ))}
-                  </div>
-                </div>
+        <div className="relative rounded-3xl overflow-hidden p-8 md:p-12 glass-card">
+          <div className="absolute inset-0 bg-gradient-warm opacity-20" />
+          <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-brand-orange/30 blur-3xl" />
+          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-brand-pink/20 blur-3xl" />
+          <div className="relative grid md:grid-cols-[1fr_auto] items-center gap-6">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-brand-orange/30">
+                <Sparkles className="h-3 w-3 text-brand-orange" />
+                <span className="text-xs font-bold tracking-wider uppercase text-brand-orange">Para vendedores</span>
               </div>
-              <p className="text-sm text-muted-foreground">{r.text}</p>
-              <div className="text-xs text-muted-foreground/70">{r.days}</div>
+              <h2 className="font-display font-black text-2xl md:text-4xl text-balance">
+                Cansado do seu inventário? <span className="gradient-text-warm">Venda pra gente.</span>
+              </h2>
+              <p className="text-muted-foreground max-w-xl">
+                Compramos seus itens de MM2 com avaliação ética e negociação profissional. Pagamento rápido, sem enrolação.
+              </p>
             </div>
-          ))}
+            <Button asChild variant="hero" size="xl">
+              <Link to="/seja-fornecedor">
+                Saiba mais <ArrowRight className="h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* AVALIAÇÕES — CTA real */}
+      <section className="container py-12">
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2">
+            <Star className="h-4 w-4 text-brand-orange fill-brand-orange" />
+            <span className="text-xs font-bold tracking-wider uppercase text-brand-orange">Avaliações reais</span>
+          </div>
+          <h2 className="font-display font-black text-3xl md:text-4xl">Sua opinião importa de verdade</h2>
+          <p className="text-muted-foreground">
+            Comprou algum item? Entre em qualquer produto e deixe sua avaliação — ela aparece para todo mundo, sem filtro.
+          </p>
+          <Button asChild variant="hero" size="lg">
+            <Link to="/loja">Ver produtos para avaliar <ArrowRight className="h-4 w-4" /></Link>
+          </Button>
         </div>
       </section>
 

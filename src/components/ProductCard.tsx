@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Product } from "@/types/store";
 import { formatBRL } from "@/data/store-config";
 import { useCart } from "@/context/CartContext";
@@ -34,7 +35,11 @@ export function ProductCard({ product, className }: ProductCardProps) {
         </div>
       )}
 
-      <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-muted/40 to-background/40 overflow-hidden mb-3 flex items-center justify-center">
+      <Link
+        to={`/produto/${product.id}`}
+        className="relative aspect-square rounded-2xl bg-gradient-to-br from-muted/40 to-background/40 overflow-hidden mb-3 flex items-center justify-center"
+        aria-label={`Ver detalhes de ${product.name}`}
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -45,10 +50,12 @@ export function ProductCard({ product, className }: ProductCardProps) {
           }}
         />
         <Package className="absolute inset-0 m-auto h-16 w-16 text-muted-foreground/30 -z-0" />
-      </div>
+      </Link>
 
       <div className="flex-1 flex flex-col gap-1 relative z-[1]">
-        <h3 className="font-display font-bold text-base leading-tight text-balance">{product.name}</h3>
+        <Link to={`/produto/${product.id}`} className="hover:text-brand-pink transition-colors">
+          <h3 className="font-display font-bold text-base leading-tight text-balance">{product.name}</h3>
+        </Link>
         <RarityLabel rarity={product.category} className="text-xs" />
         <div className="mt-2 flex items-baseline gap-2 flex-wrap">
           <span className="text-sm text-muted-foreground line-through decoration-destructive/70 decoration-2">
