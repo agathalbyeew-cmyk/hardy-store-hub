@@ -5,19 +5,26 @@ import { PRODUCTS } from "@/data/products";
 import { STORE_CONFIG } from "@/data/store-config";
 import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users } from "lucide-react";
 import heroBg from "@/assets/hero-mascot.png";
+import iconChroma from "@/assets/rarity/chroma.png";
+import iconUncommon from "@/assets/rarity/uncommon.png";
+import iconRare from "@/assets/rarity/rare.png";
+import iconLegendary from "@/assets/rarity/legendary.png";
+import iconGodly from "@/assets/rarity/godly.png";
+import iconSet from "@/assets/rarity/set.png";
+import iconLowSet from "@/assets/rarity/low-set.png";
 import type { Rarity } from "@/types/store";
 import { RARITY_LABELS } from "@/types/store";
 
 const featured = PRODUCTS.filter((p) => p.tag === "hot" || p.tag === "new" || p.tag === "promo").slice(0, 8);
 
 const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
-  { key: "chroma", gradient: "from-pink-400 to-rose-600", icon: "🌈" },
-  { key: "uncommon", gradient: "from-emerald-400 to-emerald-600", icon: "🔪" },
-  { key: "rare", gradient: "from-sky-400 to-blue-600", icon: "⚔️" },
-  { key: "legendary", gradient: "from-amber-400 to-orange-500", icon: "🗡️" },
-  { key: "godly", gradient: "from-pink-500 to-fuchsia-600", icon: "💎" },
-  { key: "set", gradient: "from-cyan-400 to-teal-600", icon: "🎁" },
-  { key: "low-set", gradient: "from-sky-300 to-cyan-500", icon: "📦" },
+  { key: "chroma", gradient: "from-pink-400 to-rose-600", icon: iconChroma },
+  { key: "uncommon", gradient: "from-emerald-400 to-emerald-600", icon: iconUncommon },
+  { key: "rare", gradient: "from-sky-400 to-blue-600", icon: iconRare },
+  { key: "legendary", gradient: "from-amber-400 to-orange-500", icon: iconLegendary },
+  { key: "godly", gradient: "from-pink-500 to-fuchsia-600", icon: iconGodly },
+  { key: "set", gradient: "from-cyan-400 to-teal-600", icon: iconSet },
+  { key: "low-set", gradient: "from-sky-300 to-cyan-500", icon: iconLowSet },
 ];
 
 const reviews = [
@@ -145,7 +152,14 @@ export default function Home() {
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-30 group-hover:opacity-50 transition-opacity`} />
               <div className="relative h-full flex flex-col items-center justify-center gap-2 p-3 text-center">
-                <span className="text-3xl">{cat.icon}</span>
+                <img
+                  src={cat.icon}
+                  alt={RARITY_LABELS[cat.key]}
+                  loading="lazy"
+                  width={512}
+                  height={512}
+                  className="h-14 w-14 md:h-16 md:w-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)] transition-transform duration-300 group-hover:scale-110"
+                />
                 <span className="text-xs md:text-sm font-bold uppercase tracking-wider">{RARITY_LABELS[cat.key]}</span>
               </div>
             </Link>
