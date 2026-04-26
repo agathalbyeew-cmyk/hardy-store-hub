@@ -27,13 +27,6 @@ const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
   { key: "low-set", gradient: "from-sky-300 to-cyan-500", icon: iconLowSet },
 ];
 
-const reviews = [
-  { name: "LucasPlayz", text: "Entrega super rápida e o suporte é incrível! Recomendo demais.", days: "2 dias atrás" },
-  { name: "MiaGamer", text: "Comprei meu primeiro godly aqui, amei o atendimento!", days: "3 dias atrás" },
-  { name: "ShadowMM2", text: "Melhor loja de MM2 que já comprei, preços justos.", days: "1 semana atrás" },
-  { name: "NovaCraft", text: "Confiável de verdade. Já fiz 4 compras e nunca tive problema.", days: "2 semanas atrás" },
-];
-
 export default function Home() {
   return (
     <div className="overflow-hidden">
