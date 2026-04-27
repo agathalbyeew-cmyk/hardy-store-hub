@@ -17,6 +17,10 @@ import Contato from "./pages/Contato";
 import Auth from "./pages/Auth";
 import Conta from "./pages/Conta";
 import SejaFornecedor from "./pages/SejaFornecedor";
+import Fanix from "./pages/Fanix";
+import Roleta from "./pages/Roleta";
+import Pedidos from "./pages/Pedidos";
+import PerfilPublico from "./pages/PerfilPublico";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +44,10 @@ const App = () => (
                 <Route path="/reembolso" element={<Reembolso />} />
                 <Route path="/contato" element={<Contato />} />
                 <Route path="/seja-fornecedor" element={<SejaFornecedor />} />
+                <Route path="/fanix" element={<Fanix />} />
+                <Route path="/roleta" element={<Roleta />} />
+                <Route path="/pedidos" element={<Pedidos />} />
+                <Route path="/u/:username" element={<PerfilPublico />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/conta" element={<Conta />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

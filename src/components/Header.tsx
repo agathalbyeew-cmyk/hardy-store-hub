@@ -10,8 +10,9 @@ import { cn } from "@/lib/utils";
 const navLinks = [
   { to: "/", label: "Início" },
   { to: "/loja", label: "Loja" },
+  { to: "/roleta", label: "Roleta 🎁" },
   { to: "/seja-fornecedor", label: "Seja Fornecedor" },
-  { to: "/sobre", label: "Sobre" },
+  { to: "/fanix", label: "Fanix" },
   { to: "/contato", label: "Contato" },
 ];
 
