@@ -45,9 +45,32 @@ Deno.serve(async (req) => {
     }
 
     const body = await req.json().catch(() => ({}));
-    const code: string | undefined = body.code;
+    const action: string = body.action ?? "callback";
     const redirectUri: string | undefined = body.redirect_uri;
 
+    // ─── action: start — return Discord OAuth URL ─────────────────────
+    if (action === "start") {
+      if (!redirectUri) {
+        return new Response(
+          JSON.stringify({ error: "Missing redirect_uri" }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      const params = new URLSearchParams({
+        client_id: DISCORD_CLIENT_ID,
+        redirect_uri: redirectUri,
+        response_type: "code",
+        scope: "identify email",
+        prompt: "consent",
+      });
+      return new Response(
+        JSON.stringify({ url: `https://discord.com/api/oauth2/authorize?${params.toString()}` }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    // ─── action: callback — exchange code ─────────────────────────────
+    const code: string | undefined = body.code;
     if (!code || !redirectUri) {
       return new Response(
         JSON.stringify({ error: "Missing code or redirect_uri" }),
