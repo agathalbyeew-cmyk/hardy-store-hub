@@ -107,6 +107,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GATILHO DE URGÊNCIA */}
+      <section className="container pt-6">
+        <div className="glass-card rounded-2xl p-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm border border-brand-orange/30">
+          <span className="inline-flex items-center gap-2"><Flame className="h-4 w-4 text-brand-orange" /><span className="font-bold">Estoque limitado</span> — itens raros saem em horas</span>
+          <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4 text-brand-pink" /><span>Entrega geralmente em <span className="font-bold">até 24h</span></span></span>
+          <span className="inline-flex items-center gap-2"><Gift className="h-4 w-4 text-brand-blue" /><Link to="/roleta" className="font-bold text-brand-blue hover:underline">Faca grátis na roleta!</Link></span>
+        </div>
+      </section>
+
+      <DnaRecommendations />
+
       {/* DESTAQUES */}
       <section className="container py-16 md:py-20">
         <div className="flex items-end justify-between mb-8 gap-4">
