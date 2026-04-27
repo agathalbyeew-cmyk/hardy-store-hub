@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
+import { VibeBanner } from "@/components/VibeBanner";
+import { DnaRecommendations } from "@/components/DnaRecommendations";
 import { PRODUCTS } from "@/data/products";
 import { STORE_CONFIG } from "@/data/store-config";
-import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users } from "lucide-react";
+import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users, Gift, Clock, Flame } from "lucide-react";
 import heroBg from "@/assets/hero-mascot.png";
 import iconChroma from "@/assets/rarity/chroma.png";
 import iconUncommon from "@/assets/rarity/uncommon.png";
@@ -30,6 +32,7 @@ const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
 export default function Home() {
   return (
     <div className="overflow-hidden">
+      <VibeBanner />
       {/* HERO */}
       <section className="relative">
         <div className="absolute inset-0 -z-10">
