@@ -9,6 +9,11 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Sparkles, Mail, Lock, User as UserIcon } from "lucide-react";
 
+// IMPORTANT: replace with your real Discord Application Client ID from
+// https://discord.com/developers/applications — and add this exact redirect URI
+// to the OAuth2 settings: {your-site-origin}/auth (e.g. https://yourdomain.com/auth)
+const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID ?? "";
+
 const emailSchema = z.string().trim().email({ message: "Email inválido" }).max(255);
 const passwordSchema = z.string().min(6, { message: "Mínimo 6 caracteres" }).max(72);
 const usernameSchema = z
