@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          created_at: string
+          customer_name: string | null
+          id: string
+          item_count: number
+          items: Json
+          order_code: string
+          status: string
+          total: number
+          updated_at: string
+          user_id: string
+          whatsapp: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_name?: string | null
+          id?: string
+          item_count?: number
+          items?: Json
+          order_code: string
+          status?: string
+          total?: number
+          updated_at?: string
+          user_id: string
+          whatsapp?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_name?: string | null
+          id?: string
+          item_count?: number
+          items?: Json
+          order_code?: string
+          status?: string
+          total?: number
+          updated_at?: string
+          user_id?: string
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
       product_reviews: {
         Row: {
           comment: string | null
@@ -71,6 +113,63 @@ export type Database = {
         }
         Relationships: []
       }
+      roulette_claims: {
+        Row: {
+          created_at: string
+          id: string
+          prize_image: string | null
+          prize_name: string
+          promo_code: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prize_image?: string | null
+          prize_name: string
+          promo_code: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prize_image?: string | null
+          prize_name?: string
+          promo_code?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      supplier_requests: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          status: string
+          user_id: string
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          status?: string
+          user_id: string
+          username: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          status?: string
+          user_id?: string
+          username?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -97,6 +196,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_user_stats: { Args: { _user_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
