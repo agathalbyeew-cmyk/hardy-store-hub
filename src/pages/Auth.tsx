@@ -9,10 +9,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Sparkles, Mail, Lock, User as UserIcon } from "lucide-react";
 
-// IMPORTANT: replace with your real Discord Application Client ID from
-// https://discord.com/developers/applications — and add this exact redirect URI
-// to the OAuth2 settings: {your-site-origin}/auth (e.g. https://yourdomain.com/auth)
-const DISCORD_CLIENT_ID = import.meta.env.VITE_DISCORD_CLIENT_ID ?? "";
+const DISCORD_REDIRECT_URI = `${typeof window !== "undefined" ? window.location.origin : ""}/auth`;
 
 const emailSchema = z.string().trim().email({ message: "Email inválido" }).max(255);
 const passwordSchema = z.string().min(6, { message: "Mínimo 6 caracteres" }).max(72);
@@ -38,6 +35,44 @@ export default function Auth() {
   useEffect(() => {
     if (user) navigate(from, { replace: true });
   }, [user, navigate, from]);
+
+  // Handle Discord OAuth callback (?code=... in URL)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const errorParam = params.get("error");
+    if (errorParam) {
+      toast.error(`Discord: ${errorParam}`);
+      window.history.replaceState({}, "", window.location.pathname);
+      return;
+    }
+    if (!code) return;
+
+    (async () => {
+      setLoading(true);
+      try {
+        const { data, error } = await supabase.functions.invoke("discord-auth", {
+          body: { action: "callback", code, redirect_uri: DISCORD_REDIRECT_URI },
+        });
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+        if (!data?.access_token || !data?.refresh_token) {
+          throw new Error("Resposta inválida do servidor Discord");
+        }
+        const { error: setErr } = await supabase.auth.setSession({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+        });
+        if (setErr) throw setErr;
+        toast.success("Conectado com Discord!");
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : "Falha no login Discord");
+      } finally {
+        window.history.replaceState({}, "", window.location.pathname);
+        setLoading(false);
+      }
+    })();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
