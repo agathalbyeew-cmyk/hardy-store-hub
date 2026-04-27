@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,17 +10,24 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { formatBRL, generateOrderId, STORE_CONFIG } from "@/data/store-config";
 import { RARITY_LABELS } from "@/types/store";
 import type { Order } from "@/types/store";
-import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, Check, MessageCircle, Receipt } from "lucide-react";
+import { Trash2, Minus, Plus, ShoppingBag, ArrowRight, Check, MessageCircle, Receipt, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Carrinho() {
   const { detailedItems, totalValue, totalItems, updateQuantity, removeItem, clearCart } = useCart();
+  const { user, profile } = useAuth();
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [order, setOrder] = useState<Order | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleCheckout = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (profile?.display_name || profile?.username) {
+      setName(profile.display_name || profile.username);
+    }
+  }, [profile]);
+
+  const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !whatsapp.trim()) {
       toast.error("Preencha nome e WhatsApp para continuar.");
@@ -38,6 +47,29 @@ export default function Carrinho() {
       total: totalValue,
       date: new Date().toLocaleString("pt-BR"),
     };
+
+    // Persiste no banco se logado (histórico)
+    if (user) {
+      try {
+        await supabase.from("orders").insert({
+          user_id: user.id,
+          order_code: newOrder.id,
+          total: newOrder.total,
+          item_count: totalItems,
+          customer_name: newOrder.customerName,
+          whatsapp: newOrder.whatsapp,
+          items: newOrder.items.map((i) => ({
+            id: i.product.id,
+            name: i.product.name,
+            quantity: i.quantity,
+            price: i.product.price,
+            rarity: i.product.category,
+          })),
+        });
+      } catch {
+        // Silencioso — pedido segue para WhatsApp mesmo se banco falhar
+      }
+    }
 
     // Build WhatsApp message
     const lines = [
@@ -65,7 +97,6 @@ export default function Carrinho() {
 
   const finalizeAfterReceipt = () => {
     clearCart();
-    setName("");
     setWhatsapp("");
     setOrder(null);
     toast.success("Pedido enviado! Em breve entraremos em contato.");
@@ -185,10 +216,14 @@ export default function Carrinho() {
               Finalizar via WhatsApp
             </Button>
 
-            <p className="text-[11px] text-center text-muted-foreground">
-              Você será redirecionado para o WhatsApp com os detalhes do pedido. A entrega é
-              combinada diretamente com nosso atendente.
-            </p>
+            <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
+              <ShieldCheck className="h-3.5 w-3.5 text-brand-pink shrink-0" />
+              <span>
+                Compra segura. {user ? "Pedido salvo no seu histórico." : (
+                  <><Link to="/auth" className="text-brand-pink font-semibold">Entre</Link> para salvar no histórico.</>
+                )}
+              </span>
+            </div>
           </form>
         </aside>
       </div>
@@ -229,6 +264,11 @@ export default function Carrinho() {
                 </div>
               </div>
 
+              {user && (
+                <Button asChild variant="glass" size="sm" className="w-full">
+                  <Link to="/pedidos">Ver no histórico</Link>
+                </Button>
+              )}
               <Button variant="hero" size="lg" className="w-full" onClick={finalizeAfterReceipt}>
                 Concluir
               </Button>

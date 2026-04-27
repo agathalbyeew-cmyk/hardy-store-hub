@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import amarelinhaImg from "@/assets/amarelinha.png";
-import { Wifi, WifiOff } from "lucide-react";
+import { Wifi, WifiOff, Sparkles } from "lucide-react";
+import { SnakeGame } from "@/components/SnakeGame";
 
 /**
- * Full-screen overlay shown when the browser loses network connectivity.
- * Uses the navigator.onLine API + online/offline events.
+ * Tela mostrada quando o usuário fica offline. Inclui um mini-game de cobrinha
+ * para entreter enquanto a conexão não volta.
  */
 export function OfflineScreen() {
   const [isOffline, setIsOffline] = useState(
@@ -25,39 +25,30 @@ export function OfflineScreen() {
   if (!isOffline) return null;
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-background/95 backdrop-blur-xl animate-fade-in-up">
-      <div className="absolute inset-0 bg-gradient-hero opacity-20" />
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-background/95 backdrop-blur-xl animate-fade-in-up overflow-y-auto">
+      <div className="absolute inset-0 bg-gradient-hero opacity-20 pointer-events-none" />
 
-      <div className="container relative max-w-4xl mx-auto px-6">
-        <div className="glass-card rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-8">
-          {/* Image */}
-          <div className="relative shrink-0">
-            <div className="absolute inset-0 -m-4 rounded-full bg-gradient-warm opacity-30 blur-2xl animate-glow-pulse" />
-            <img
-              src={amarelinhaImg}
-              alt="Personagem convidando para brincar de amarelinha"
-              className="relative w-48 md:w-64 h-auto object-contain animate-float drop-shadow-[0_10px_30px_hsl(var(--pink)/0.45)]"
-              draggable={false}
-            />
-          </div>
-
-          {/* Text */}
-          <div className="flex-1 text-center md:text-left space-y-4">
+      <div className="container relative max-w-2xl mx-auto px-4 py-8">
+        <div className="glass-card rounded-3xl p-5 md:p-8 space-y-5">
+          <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-brand-pink/30">
               <WifiOff className="h-3.5 w-3.5 text-brand-pink" />
               <span className="text-xs font-semibold">Sem conexão</span>
             </div>
-            <h1 className="font-display font-black text-2xl md:text-4xl leading-tight text-balance">
-              Uma pena. Enquanto espera o wifi voltar,{" "}
-              <span className="gradient-text">brinque de amarelinha comigo!</span>
+            <h1 className="font-display font-black text-2xl md:text-3xl leading-tight text-balance">
+              Wifi sumiu? <span className="gradient-text">Joga uma cobrinha aqui!</span>
             </h1>
-            <p className="text-sm md:text-base text-muted-foreground">
-              A Hardy Store volta assim que sua conexão for restabelecida. ✨
+            <p className="text-sm text-muted-foreground">
+              A Hardy Store volta assim que sua conexão voltar. Enquanto isso, bata seu recorde 🐍
             </p>
-            <div className="flex items-center gap-2 justify-center md:justify-start text-xs text-muted-foreground pt-2">
-              <Wifi className="h-3.5 w-3.5 animate-pulse" />
-              <span>Aguardando reconexão...</span>
-            </div>
+          </div>
+
+          <SnakeGame />
+
+          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
+            <Sparkles className="h-3 w-3 text-brand-pink" />
+            <Wifi className="h-3 w-3 animate-pulse" />
+            <span>Aguardando reconexão...</span>
           </div>
         </div>
       </div>

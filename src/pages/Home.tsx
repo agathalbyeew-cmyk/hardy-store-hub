@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
+import { VibeBanner } from "@/components/VibeBanner";
+import { DnaRecommendations } from "@/components/DnaRecommendations";
 import { PRODUCTS } from "@/data/products";
 import { STORE_CONFIG } from "@/data/store-config";
-import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users } from "lucide-react";
+import { Zap, Shield, MessageCircle, Sparkles, Star, ArrowRight, Package, Headphones, Users, Gift, Clock, Flame } from "lucide-react";
 import heroBg from "@/assets/hero-mascot.png";
 import iconChroma from "@/assets/rarity/chroma.png";
 import iconUncommon from "@/assets/rarity/uncommon.png";
@@ -30,6 +32,7 @@ const categories: Array<{ key: Rarity; gradient: string; icon: string }> = [
 export default function Home() {
   return (
     <div className="overflow-hidden">
+      <VibeBanner />
       {/* HERO */}
       <section className="relative">
         <div className="absolute inset-0 -z-10">
@@ -103,6 +106,17 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* GATILHO DE URGÊNCIA */}
+      <section className="container pt-6">
+        <div className="glass-card rounded-2xl p-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm border border-brand-orange/30">
+          <span className="inline-flex items-center gap-2"><Flame className="h-4 w-4 text-brand-orange" /><span className="font-bold">Estoque limitado</span> — itens raros saem em horas</span>
+          <span className="inline-flex items-center gap-2"><Clock className="h-4 w-4 text-brand-pink" /><span>Entrega geralmente em <span className="font-bold">até 24h</span></span></span>
+          <span className="inline-flex items-center gap-2"><Gift className="h-4 w-4 text-brand-blue" /><Link to="/roleta" className="font-bold text-brand-blue hover:underline">Faca grátis na roleta!</Link></span>
+        </div>
+      </section>
+
+      <DnaRecommendations />
 
       {/* DESTAQUES */}
       <section className="container py-16 md:py-20">
